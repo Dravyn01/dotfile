@@ -43,30 +43,28 @@ function M.setup()
   }
 
   cmp.setup({
-    -- ตั้งค่า Snippet engine ที่ใช้
+    -- setup Snippet engine
     snippet = {
       expand = function(args)
-        luasnip.lsp_expand(args.body) -- ใช้ luasnip ในการขยาย snippet
+        luasnip.lsp_expand(args.body) -- use luasnip for snippet
       end,
     },
 
-    -- การกำหนดปุ่มลัดสำหรับการทำงานของ nvim-cmp
+    -- Keymap for nvim-cmp
     mapping = cmp.mapping.preset.insert({
-      ["<Up>"] = cmp.mapping.scroll_docs(-4),               -- เลื่อนเอกสารขึ้น
-      ["<Down>"] = cmp.mapping.scroll_docs(4),              -- เลื่อนเอกสารลง
-      ["<C-Space>"] = cmp.mapping.complete(),               -- เรียกการเติมข้อความอัตโนมัติ
-      ["<C-e>"] = cmp.mapping.abort(),                      -- ยกเลิกการเติมข้อความ
-      ["<Enter>"] = cmp.mapping.confirm({ select = true }), -- ยืนยันการเลือก (select=true: จะเลือกรายการแรกโดยอัตโนมัติ)
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<Enter>"] = cmp.mapping.confirm({ select = true }),
 
       ["<Up>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_prev_item() -- เลื่อนเลือกรายการก่อนหน้าในเมนู completion
+          cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)       -- ถ้ามี snippet ให้กระโดดไปส่วนก่อนหน้า
+          luasnip.jump(-1)
         else
-          fallback()             -- ทำงานตามค่าเริ่มต้น
+          fallback()
         end
-      end, { 'i', 's' }),        -- ใช้ได้ในโหมด Insert และ Select (ของ snippet)
+      end, { 'i', 's', 'n' }),
 
       ["<Down>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -78,6 +76,7 @@ function M.setup()
         end
       end, { 'i', 's' }),          -- ใช้ได้ในโหมด Insert และ Select (ของ snippet)
     }),
+
     -- แหล่งข้อมูลสำหรับการเติมข้อความอัตโนมัติ (เรียงตามลำดับความสำคัญ)
     sources = cmp.config.sources({
       { name = "nvim_lsp" }, -- ดึงข้อมูลจาก LSP servers
@@ -85,9 +84,10 @@ function M.setup()
       { name = "buffer" },   -- ดึงคำจากบัฟเฟอร์ปัจจุบัน
       { name = "path" },     -- ดึงชื่อไฟล์และเส้นทาง
     }),
+
     -- การแสดงผลของเมนู completion
     --window = {
-    -- completion = cmp.config.window.bordered(),    -- มีขอบรอบเมนู completion
+    -- completion = cmp.config.window.bordered(),    -- เพิ่มขอบเมนู completion
     -- documentation = cmp.config.window.bordered(), -- มีขอบรอบหน้าต่าง documentation
     --},
 

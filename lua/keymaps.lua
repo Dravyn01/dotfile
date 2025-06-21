@@ -2,24 +2,13 @@
 local map = vim.keymap.set
 vim.g.mapleader = " "
 
--- ==============================
--- 1. ปุ่มลัดทั่วไป (General Keymaps)
--- ==============================
+-- General Keymaps
 
--- Clear search highlight with <leader>nh (leader + n + h)
-map("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlight" })
-
--- Quit Neovim with <leader>qq (leader + q + q)
-map("n", "<leader>qq", ":qa<CR>", { desc = "Quit all windows" })
-
--- Save file with <leader>w (leader + w)
+-- save file
 map("n", "<leader>w", ":w<CR>", { desc = "Save current file" })
 
+-- shot cut
 map("n", ";", ":")
-
--- ==============================
--- 2. ปุ่มลัดสำหรับการจัดการหน้าต่าง/บัฟเฟอร์ (Window/Buffer Management)
--- ==============================
 
 -- Navigate between windows (like tmux)
 map("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
@@ -29,19 +18,6 @@ map("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 
 -- open folder
 map("n", "<leader>o", ":NvimTreeToggle<CR>")
-
--- ==============================
--- 3. ปุ่มลัดสำหรับ LSP และ Formatting
--- ==============================
-
--- จัดรูปแบบโค้ดด้วย <leader>fm (leader + f + m)
--- (คำสั่งนี้ถูกตั้งค่าโดย conform.nvim อยู่แล้ว แต่เราก็ยังสามารถ map ได้ที่นี่)
--- map({"n", "v"}, "<leader>fm", function()
---   require("conform").format({
---     lsp_format = "fallback",
---     async = false, -- ทำให้การจัดรูปแบบเป็น synchronous เพื่อให้แน่ใจว่าเสร็จก่อน
---   })
--- end, { desc = "Format file/selection (conform)" })
 
 -- Go to definition (gd)
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })

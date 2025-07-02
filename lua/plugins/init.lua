@@ -10,6 +10,7 @@ require("lazy").setup({
       lsp.setup_cssls()
       lsp.setup_jsonls()
       lsp.setup_rust()
+      lsp.setup_rust()
       lsp.setup_emmet_ls()
     end
   },
@@ -282,6 +283,10 @@ require("lazy").setup({
         },
       })
     end,
+  },
+
+  {
+    "tribela/vim-transparent",
   },
 
   -- colorscheme

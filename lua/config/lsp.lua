@@ -117,12 +117,6 @@ function M.setup_jsonls()
   })
 end
 
-function M.setup_rust()
-  conf.rust_analyzer.setup({
-    on_attach = M.on_attach,
-  })
-end
-
 function M.setup_typescript()
   conf.ts_ls.setup({
     on_attach = M.on_attach,
@@ -156,6 +150,26 @@ function M.setup_java()
               default = true,
             }
           }
+        }
+      }
+    }
+  })
+end
+
+function M.setup_rust()
+  conf.rust_analyzer.setup({
+    on_attach = M.on_attach,
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = { allFeatures = true },
+        checkOnSave = {
+          command = "clippy"
+        },
+        inlayHints = {
+          enable = true, -- แสดง hint ในตัวแปร เช่น type ของค่า
+        },
+        diagnostics = {
+          enable = true,
         }
       }
     }
